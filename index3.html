@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anath Niradhar Sevabhavi Sanstha | Hope & Care</title>
+    <meta name="description" content="Official website of Anath Niradhar Sevabhavi Sanstha. Helping orphans, providing food, and medical aid since 2021.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: '#2E8B57', // Sea Green
+                        secondary: '#FF914D', // Warm Orange
+                        bg: '#FAFAFA', // Very Light Gray
+                        surface: '#FFFFFF',
+                    },
+                    boxShadow: {
+                        'subtle': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+                        'elevated': '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01)',
+                    },
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tight: '-0.02em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Refined Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }
+        
+        /* Smooth Fade In */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom Selection */
+        ::selection { background: #2E8B57; color: white; }
+
+        /* Custom Dropdown Styles */
+        .custom-select-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            margin-top: 0.5rem;
+            background: white;
+            border: 1px solid #F3F4F6;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .custom-select.open .custom-select-options {
+            display: block;
+            animation: slideDown 0.2s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-bg text-gray-800 font-sans antialiased selection:bg-primary selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-surface/80 border-b border-gray-100" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            
+            <!-- Custom Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 flex items-center justify-center">
+                    <!-- Logo SVG -->
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full transform transition-transform group-hover:scale-105 duration-500">
+                        <rect width="40" height="40" rx="10" class="fill-primary/10 group-hover:fill-primary/20 transition-colors"/>
+                        <path d="M20 10L10 18V30H30V18L20 10Z" class="stroke-primary" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 18C20 18 22 16 25 18C28 20 26 24 20 28C14 24 12 20 15 18C18 16 20 18 20 18Z" class="fill-secondary/20 stroke-secondary" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-base tracking-tight text-gray-900 leading-none">ANATH NIRADHAR</span>
+                    <span class="text-[10px] uppercase tracking-widest text-primary font-medium mt-0.5">Sevabhavi Sanstha</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Home</a>
+                <a href="#about" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">About</a>
+                <a href="#work" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Programs</a>
+                <a href="#gallery" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Gallery</a>
+                <a href="#contact" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Contact</a>
+                <a href="#donate" class="group relative overflow-hidden bg-gray-900 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all hover:shadow-lg hover:shadow-gray-900/20 flex items-center gap-2">
+                    <span class="relative z-10">Donate Now</span>
+                    <iconify-icon icon="solar:heart-angle-linear" class="relative z-10 text-secondary transition-transform group-hover:scale-110"></iconify-icon>
+                    <div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 hover:text-gray-900">
+                <iconify-icon icon="solar:hamburger-menu-linear" width="24"></iconify-icon>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-surface z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-6 md:hidden">
+            <a href="#home" class="text-2xl font-serif text-gray-900 mobile-link">Home</a>
+            <a href="#about" class="text-2xl font-serif text-gray-900 mobile-link">About</a>
+            <a href="#work" class="text-2xl font-serif text-gray-900 mobile-link">Programs</a>
+            <a href="#gallery" class="text-2xl font-serif text-gray-900 mobile-link">Gallery</a>
+            <a href="#contact" class="text-2xl font-serif text-gray-900 mobile-link">Contact</a>
+            <a href="#donate" class="bg-primary text-white px-8 py-3 rounded-full text-lg mobile-link mt-4">Donate Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden fade-in-up">
+        <!-- Background Decor -->
+        <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="relative z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 border border-green-100 text-primary text-xs font-semibold uppercase tracking-wider mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    Reg. No. F-45892/AHM
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-serif text-gray-900 leading-[1.05] tracking-tight mb-6">
+                    A home for the <br> <span class="text-gray-400 italic font-normal">homeless,</span> a family for the 
+                    <span class="relative inline-block text-primary">
+                        orphan.
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-secondary/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="3" fill="none" /></svg>
+                    </span>
+                </h1>
+                
+                <p class="text-lg text-gray-500 mb-8 leading-relaxed max-w-lg font-light">
+                    We provide shelter, food, and dignity to those who have none. Join our mission in Ahmednagar & Pune to build families for the forgotten.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#donate" class="bg-primary text-white px-8 py-4 rounded-full text-sm font-semibold hover:bg-green-700 transition-all shadow-xl shadow-primary/20 hover:shadow-primary/30 flex items-center gap-2 group">
+                        Make a Donation
+                        <iconify-icon icon="solar:arrow-right-linear" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                    </a>
+                    <a href="#about" class="bg-white text-gray-700 border border-gray-200 px-8 py-4 rounded-full text-sm font-semibold hover:border-gray-300 hover:bg-gray-50 transition-all">
+                        Our Mission
+                    </a>
+                </div>
+
+                <div class="mt-12 flex items-center gap-6 border-t border-gray-100 pt-6">
+                    <div>
+                        <p class="text-2xl font-bold text-gray-900 tracking-tight">3+</p>
+                        <p class="text-xs text-gray-500 uppercase tracking-wide">Years of Service</p>
+                    </div>
+                    <div class="w-px h-8 bg-gray-200"></div>
+                    <div>
+                        <p class="text-2xl font-bold text-gray-900 tracking-tight">100%</p>
+                        <p class="text-xs text-gray-500 uppercase tracking-wide">Voluntary</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-secondary/10 rounded-[2.5rem] transform rotate-3 scale-105 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1000&auto=format&fit=crop" alt="Helping children" class="relative rounded-[2rem] shadow-2xl shadow-gray-200 object-cover w-full h-[600px] border border-white">
+                
+                <!-- Floating Info Card -->
+                <div class="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900">Current: Education Kit Drive</p>
+                            <div class="w-full bg-gray-100 h-1.5 rounded-full mt-2 w-48">
+                                <div class="bg-secondary h-1.5 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <a href="#donate" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Strip (Trust) -->
+    <div class="border-y border-gray-100 py-10 bg-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-sm text-gray-400 font-medium mb-6">SUPPORTED BY LOCAL HEROES</p>
+            <div class="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="flex items-center gap-2"><iconify-icon icon="solar:shop-2-bold" class="text-3xl text-gray-800"></iconify-icon><span class="font-bold text-gray-800 tracking-tight">Local Business</span></div>
+                <div class="flex items-center gap-2"><iconify-icon icon="solar:users-group-two-rounded-bold" class="text-3xl text-gray-800"></iconify-icon><span class="font-bold text-gray-800 tracking-tight">Rotary Club</span></div>
+                <div class="flex items-center gap-2"><iconify-icon icon="solar:city-bold" class="text-3xl text-gray-800"></iconify-icon><span class="font-bold text-gray-800 tracking-tight">MahaGov</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-bg fade-in-up">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-green-100 to-orange-100 rounded-full blur-3xl opacity-30"></div>
+                    <div class="grid grid-cols-2 gap-6 relative">
+                        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=500&q=80" class="rounded-2xl object-cover h-72 w-full shadow-card hover:translate-y-[-5px] transition-transform duration-500" alt="Volunteers">
+                        <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=500&q=80" class="rounded-2xl object-cover h-72 w-full mt-12 shadow-card hover:translate-y-[-5px] transition-transform duration-500" alt="Children">
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-primary font-semibold tracking-wide uppercase text-xs mb-4">Our Story</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif text-gray-900 mb-6 tracking-tight">Compassion in action,<br>since 2021.</h3>
+                    <div class="space-y-6 text-gray-600 leading-relaxed font-light text-lg">
+                        <p>
+                            In 2021, <strong class="text-gray-900 font-medium">Mr. Santosh Aher</strong> and <strong class="text-gray-900 font-medium">Mrs. Sheetal Aher</strong> witnessed a reality they couldn't ignore in our local communities.
+                        </p>
+                        <p>
+                            Anath Niradhar Sevabhavi Sanstha was born from the belief that family isn't just blood—it's who cares for you when you are down. We are a registered NGO working tirelessly to bridge the gap between privilege and poverty.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-10 flex gap-4">
+                        <a href="#contact" class="text-gray-900 font-medium flex items-center gap-2 hover:text-primary transition-colors group">
+                            Volunteer with us <iconify-icon icon="solar:arrow-right-linear" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Cards -->
+    <section id="work" class="py-32 bg-white fade-in-up">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div class="max-w-xl">
+                    <h2 class="text-primary font-semibold tracking-wide uppercase text-xs mb-4">What We Do</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif text-gray-900 tracking-tight">Comprehensive care for <br>sustainable change.</h3>
+                </div>
+                <a href="#donate" class="hidden md:flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 text-gray-600 hover:border-primary hover:text-primary hover:bg-green-50 transition-all">
+                    <iconify-icon icon="solar:arrow-right-down-linear" width="20"></iconify-icon>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="group p-8 rounded-[2rem] bg-bg border border-gray-100 hover:border-primary/20 hover:shadow-elevated transition-all duration-300">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-primary shadow-subtle mb-8 group-hover:scale-110 transition-transform">
+                        <iconify-icon icon="solar:book-2-linear" width="28"></iconify-icon>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-3 tracking-tight">Education</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-8">
+                        We sponsor school fees, uniforms, and books for children who are at risk of dropping out due to financial constraints.
+                    </p>
+                    <div class="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+                        <div class="bg-primary h-full w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group p-8 rounded-[2rem] bg-bg border border-gray-100 hover:border-secondary/20 hover:shadow-elevated transition-all duration-300">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-secondary shadow-subtle mb-8 group-hover:scale-110 transition-transform">
+                        <iconify-icon icon="solar:chef-hat-linear" width="28"></iconify-icon>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-3 tracking-tight">Nutrition</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-8">
+                        Daily food drives in slum areas and support for local orphanages ensuring no child sleeps on an empty stomach.
+                    </p>
+                    <div class="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+                        <div class="bg-secondary h-full w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group p-8 rounded-[2rem] bg-bg border border-gray-100 hover:border-blue-500/20 hover:shadow-elevated transition-all duration-300">
+                    <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-500 shadow-subtle mb-8 group-hover:scale-110 transition-transform">
+                        <iconify-icon icon="solar:medical-kit-linear" width="28"></iconify-icon>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-3 tracking-tight">Healthcare</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-8">
+                        Free medical camps, cataract surgeries for the elderly, and emergency medical fund assistance.
+                    </p>
+                    <div class="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+                        <div class="bg-blue-500 h-full w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="donate" class="py-24 bg-[#0F172A] text-white relative overflow-hidden fade-in-up">
+        <!-- Abstract Pattern -->
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#2E8B57 1px, transparent 1px); background-size: 40px 40px;"></div>
+        <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-white text-xs font-medium mb-6">
+                        <iconify-icon icon="solar:verified-check-bold" class="text-primary"></iconify-icon>
+                        80G & 12A Registered
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif mb-6 tracking-tight">Your contribution saves lives.</h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg font-light">
+                        Transparency is our core value. All donations are eligible for tax exemption under section 80G.
+                    </p>
+                    
+                    <div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10">
+                        <h4 class="font-medium text-lg mb-6 flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center"><iconify-icon icon="solar:bank-linear"></iconify-icon></div>
+                            Bank Transfer Details
+                        </h4>
+                        <div class="space-y-4 font-mono text-sm text-gray-300">
+                            <div class="flex justify-between border-b border-white/5 pb-2 hover:bg-white/5 px-2 rounded transition-colors cursor-pointer group">
+                                <span class="opacity-60">Account Name</span>
+                                <span class="text-white group-hover:text-primary transition-colors text-right">Anath Niradhar Sevabhavi Sanstha</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/5 pb-2 hover:bg-white/5 px-2 rounded transition-colors cursor-pointer group">
+                                <span class="opacity-60">Bank</span>
+                                <span class="text-white group-hover:text-primary transition-colors">State Bank of India</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/5 pb-2 hover:bg-white/5 px-2 rounded transition-colors cursor-pointer group">
+                                <span class="opacity-60">Account No</span>
+                                <span class="text-white group-hover:text-primary transition-colors">3432 XXXX XXXX</span>
+                            </div>
+                            <div class="flex justify-between hover:bg-white/5 px-2 rounded transition-colors cursor-pointer group">
+                                <span class="opacity-60">IFSC</span>
+                                <span class="text-white group-hover:text-primary transition-colors">SBIN000XXXX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center justify-center">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="relative bg-white p-8 rounded-[1.8rem] shadow-2xl text-center">
+                            <div class="bg-gray-50 rounded-2xl p-4 mb-4 border border-gray-100">
+                                <!-- QR Placeholder -->
+                                <div class="w-56 h-56 flex flex-col items-center justify-center text-gray-300 border-2 border-dashed border-gray-200 rounded-xl">
+                                    <iconify-icon icon="solar:qr-code-linear" class="text-6xl mb-2"></iconify-icon>
+                                    <span class="text-xs font-medium uppercase tracking-widest text-gray-400">Scan QR Code</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-900 font-bold text-lg tracking-tight">Scan to Donate</p>
+                            
+                            <!-- UPI ID for copy-paste -->
+                            <div class="mt-3 flex items-center justify-center gap-2 bg-gray-100 px-3 py-2 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors" onclick="navigator.clipboard.writeText('anss@sbi')">
+                                <span class="text-sm font-mono text-gray-600 font-medium">anss@sbi</span>
+                                <iconify-icon icon="solar:copy-linear" class="text-gray-400"></iconify-icon>
+                            </div>
+
+                            <div class="flex justify-center gap-3 mt-4 grayscale opacity-60">
+                                <iconify-icon icon="solar:wallet-linear" width="24" class="text-gray-800"></iconify-icon>
+                                <span class="text-xs text-gray-500">GPay • PhonePe • Paytm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-32 bg-white fade-in-up">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-primary font-semibold tracking-wide uppercase text-xs mb-4">Gallery</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif text-gray-900 tracking-tight">Moments of joy</h3>
+                </div>
+                <a href="#" class="hidden md:flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
+                    View Instagram <iconify-icon icon="solar:arrow-right-up-linear" width="16"></iconify-icon>
+                </a>
+            </div>
+
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                <!-- Gallery Item 1 -->
+                <div class="break-inside-avoid group relative overflow-hidden rounded-2xl cursor-zoom-in gallery-item">
+                    <img src="https://images.unsplash.com/photo-1524069290683-0457abfe42c3?auto=format&fit=crop&w=600&q=80" alt="Education" class="w-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-medium tracking-tight translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Education Drive</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 2 -->
+                <div class="break-inside-avoid group relative overflow-hidden rounded-2xl cursor-zoom-in gallery-item">
+                    <img src="https://images.unsplash.com/photo-1594708767771-a7502209ff51?auto=format&fit=crop&w=600&q=80" alt="Food" class="w-full object-cover transition-transform duration-700 group-hover:scale-105">
+                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-medium tracking-tight translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Food Distribution</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 3 -->
+                <div class="break-inside-avoid group relative overflow-hidden rounded-2xl cursor-zoom-in gallery-item">
+                    <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=600&q=80" alt="Community" class="w-full object-cover transition-transform duration-700 group-hover:scale-105">
+                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-medium tracking-tight translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Community Support</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 4 -->
+                <div class="break-inside-avoid group relative overflow-hidden rounded-2xl cursor-zoom-in gallery-item">
+                    <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=600&q=80" alt="Smiles" class="w-full object-cover transition-transform duration-700 group-hover:scale-105">
+                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-medium tracking-tight translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Happy Faces</p>
+                    </div>
+                </div>
+                 <!-- Gallery Item 5 -->
+                <div class="break-inside-avoid group relative overflow-hidden rounded-2xl cursor-zoom-in gallery-item">
+                    <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=600&q=80" alt="Donation" class="w-full object-cover transition-transform duration-700 group-hover:scale-105">
+                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-medium tracking-tight translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Giving Back</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section id="contact" class="bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-24">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-2xl font-serif text-gray-900 mb-8 tracking-tight">Get in touch</h3>
+                    <div class="space-y-8">
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-900 shrink-0">
+                                <iconify-icon icon="solar:map-point-linear" width="24"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900 mb-1">Head Office</p>
+                                <p class="text-gray-500 text-sm leading-relaxed">
+                                    Flat No. 4, Sai Heights, Near Ganpati Mandir,<br>
+                                    Ahmednagar, Maharashtra, 414001
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-900 shrink-0">
+                                <iconify-icon icon="solar:phone-calling-linear" width="24"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900 mb-1">Phone</p>
+                                <a href="tel:+919833234328" class="text-gray-500 text-sm hover:text-primary transition-colors">+91 9833234328</a>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-900 shrink-0">
+                                <iconify-icon icon="solar:letter-linear" width="24"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900 mb-1">Email</p>
+                                <a href="mailto:anssniradhar@gmail.com" class="text-gray-500 text-sm hover:text-primary transition-colors">anssniradhar@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simple Form with Custom Dropdown -->
+                <form class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="Name" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:border-primary focus:bg-white transition-all">
+                            <input type="tel" placeholder="Phone" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:border-primary focus:bg-white transition-all">
+                        </div>
+                        <input type="email" placeholder="Email" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:border-primary focus:bg-white transition-all">
+                        
+                        <!-- Custom Dropdown Component -->
+                        <div class="custom-select relative group" id="support-dropdown">
+                            <button type="button" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm flex justify-between items-center text-gray-500 hover:bg-white focus:border-primary transition-all">
+                                <span class="selected-value">How do you want to help?</span>
+                                <iconify-icon icon="solar:alt-arrow-down-linear" class="transition-transform duration-300"></iconify-icon>
+                            </button>
+                            <div class="custom-select-options">
+                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 option" data-value="monetary">Monetary Donation</div>
+                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 option" data-value="food">Food / Grocery Kit</div>
+                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 option" data-value="clothes">Clothes & Blankets</div>
+                                <div class="px-4 py-2 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 option" data-value="volunteer">Volunteering</div>
+                            </div>
+                            <input type="hidden" name="support_type" id="support_type_input">
+                        </div>
+
+                        <textarea rows="4" placeholder="Your Message" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:border-primary focus:bg-white transition-all resize-none"></textarea>
+                        <button type="button" class="w-full bg-gray-900 text-white px-6 py-3.5 rounded-xl text-sm font-medium hover:bg-black transition-all">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-200 bg-white">
+            <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex flex-col md:flex-row items-center gap-2 md:gap-6">
+                     <!-- Footer Logo -->
+                    <div class="flex items-center gap-2 opacity-70 grayscale hover:grayscale-0 transition-all">
+                        <div class="relative w-6 h-6 flex items-center justify-center">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                                <rect width="40" height="40" rx="10" class="fill-gray-200"/>
+                                <path d="M20 10L10 18V30H30V18L20 10Z" class="stroke-gray-600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-600 tracking-tight">ANSS</span>
+                    </div>
+                    <span class="text-[10px] text-gray-400 font-mono border-l pl-4 border-gray-200 hidden md:block">Reg. No: F-45892/AHM</span>
+                </div>
+                
+                <p class="text-xs text-gray-400">© 2026 Anath Niradhar Sevabhavi Sanstha.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-gray-900 transition-colors"><iconify-icon icon="solar:facebook-linear"></iconify-icon></a>
+                    <a href="#" class="text-gray-400 hover:text-gray-900 transition-colors"><iconify-icon icon="solar:instagram-linear"></iconify-icon></a>
+                    <a href="#" class="text-gray-400 hover:text-gray-900 transition-colors"><iconify-icon icon="solar:twitter-linear"></iconify-icon></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white/70 hover:text-white text-4xl transition-colors">
+            <iconify-icon icon="solar:close-circle-linear"></iconify-icon>
+        </button>
+        <img id="lightbox-img" src="" alt="Gallery Fullscreen" class="max-w-full max-h-[90vh] rounded shadow-2xl">
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const links = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                menu.classList.remove('translate-x-full');
+                btn.querySelector('iconify-icon').setAttribute('icon', 'solar:close-circle-linear');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.add('translate-x-full');
+                btn.querySelector('iconify-icon').setAttribute('icon', 'solar:hamburger-menu-linear');
+                document.body.style.overflow = '';
+            }
+        }
+
+        btn.addEventListener('click', toggleMenu);
+        links.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Intersection Observer for Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        
+        document.querySelectorAll('.gallery-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        document.getElementById('lightbox-close').addEventListener('click', () => {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox) {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Custom Dropdown Logic
+        const dropdown = document.getElementById('support-dropdown');
+        const dropdownBtn = dropdown.querySelector('button');
+        const dropdownOptions = dropdown.querySelectorAll('.option');
+        const selectedValueSpan = dropdown.querySelector('.selected-value');
+        const hiddenInput = document.getElementById('support_type_input');
+
+        dropdownBtn.addEventListener('click', () => {
+            dropdown.classList.toggle('open');
+            const icon = dropdownBtn.querySelector('iconify-icon');
+            if(dropdown.classList.contains('open')){
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        dropdownOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const value = option.getAttribute('data-value');
+                const text = option.innerText;
+                
+                selectedValueSpan.innerText = text;
+                selectedValueSpan.classList.add('text-gray-900');
+                hiddenInput.value = value;
+                
+                dropdown.classList.remove('open');
+                dropdownBtn.querySelector('iconify-icon').style.transform = 'rotate(0deg)';
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('open');
+                if(dropdownBtn.querySelector('iconify-icon')) {
+                    dropdownBtn.querySelector('iconify-icon').style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
